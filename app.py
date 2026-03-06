@@ -100,7 +100,7 @@ h1,h2,h3,h4{{
     position:absolute;
     right:2rem; bottom:-1rem;
     font-family:'Space Grotesk',sans-serif;
-    font-size:4rem; font-weight:800;
+    font-size:3rem; font-weight:800;
     color:rgba(255,255,255,0.022);
     letter-spacing:-2px;
     pointer-events:none; user-select:none;
