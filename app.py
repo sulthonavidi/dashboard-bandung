@@ -1,5 +1,5 @@
 # ╔══════════════════════════════════════════════════════════════════════╗
-# ║     PROFIL KEPENDUDUKAN KOTA BANDUNG  ·  Enterprise Dark Edition     ║
+# ║     PROFIL KEPENDUDUKAN KOTA BANDUNG  ·  Ultimate Edition            ║
 # ║     Data: BPS Kota Bandung 2025  |  Streamlit + Plotly               ║
 # ╚══════════════════════════════════════════════════════════════════════╝
 
@@ -22,27 +22,26 @@ st.set_page_config(
 )
 
 # ══════════════════════════════════════════════════════════
-#  DESIGN TOKENS  —  World-Class Enterprise Dark
-#  Reference: Bloomberg · Palantir · McKinsey · Linear
+#  DESIGN TOKENS (Enterprise Dark Base)
 # ══════════════════════════════════════════════════════════
 C = {
     "bg"       : "#07090E",   # terminal black — absolute base
-    "surface"  : "#0D1117",   # card layer (GitHub dark level)
+    "surface"  : "#0D1117",   # card layer
     "surface2" : "#141B27",   # elevated state
-    "border"   : "#1C2333",   # default border (very low contrast)
-    "text"     : "#E6EDF5",   # near-white — crisp readability
+    "border"   : "#1C2333",   # default border
+    "text"     : "#E6EDF5",   # near-white
     "muted"    : "#5B6F8A",   # secondary labels
-    "amber"    : "#C87D2A",   # gold — insight / warm accent
-    "sky"      : "#1F73E8",   # corporate blue — primary data
-    "teal"     : "#0D9E72",   # emerald green — positive
-    "rose"     : "#D63B56",   # alert red — female / warning
-    "violet"   : "#6B58E0",   # indigo — neutral accent
+    "amber"    : "#C87D2A",   # gold — insight
+    "sky"      : "#1F73E8",   # corporate blue
+    "teal"     : "#0D9E72",   # emerald green
+    "rose"     : "#D63B56",   # alert red
+    "violet"   : "#6B58E0",   # indigo
 }
 
 # ── CSS PREMIUM ───────────────────────────────────────────────────
 st.markdown(f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600&family=Space+Grotesk:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Nunito:wght@400;500;600;700&display=swap');
 
 /* ═══════════════════════════════
    RESET
@@ -55,7 +54,7 @@ html,body,
 [data-testid="stAppViewContainer"]>.main,
 [data-testid="block-container"]{{
     background:{C["bg"]} !important;
-    font-family:'Inter',sans-serif;
+    font-family:'Nunito',sans-serif;
     color:{C["text"]};
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
@@ -70,19 +69,19 @@ html,body,
    TYPOGRAPHY
 ═══════════════════════════════ */
 h1,h2,h3,h4{{
-    font-family:'Space Grotesk',sans-serif;
+    font-family:'Sora',sans-serif;
     color:{C["text"]};
     letter-spacing:-.4px;
 }}
 
 /* ═══════════════════════════════
-   HERO
+   HERO (From app2, converted to Sora/Nunito)
 ═══════════════════════════════ */
 .hero{{
     background:{C["surface"]};
     border:1px solid {C["border"]};
     border-left:3px solid {C["sky"]};
-    border-radius:0 10px 10px 0;
+    border-radius:0 14px 14px 0;
     padding:1.9rem 2.4rem 1.75rem;
     margin-bottom:1.75rem;
     position:relative;
@@ -99,15 +98,16 @@ h1,h2,h3,h4{{
     content:'KOTA BANDUNG 2025';
     position:absolute;
     right:2rem; bottom:-1rem;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:3rem; font-weight:800;
+    font-family:'Sora',sans-serif;
+    font-size:2.5rem; font-weight:800;
     color:rgba(255,255,255,0.022);
     letter-spacing:-2px;
     pointer-events:none; user-select:none;
-    line-height:2; white-space:nowrap;
+    line-height:3; white-space:nowrap;
 }}
 .hero-kicker{{
-    font-size:.63rem; font-weight:600;
+    font-family:'Nunito',sans-serif;
+    font-size:.65rem; font-weight:700;
     letter-spacing:2.8px; text-transform:uppercase;
     color:{C["muted"]};
     margin-bottom:.6rem;
@@ -122,7 +122,7 @@ h1,h2,h3,h4{{
     flex-shrink:0;
 }}
 .hero-title{{
-    font-family:'Space Grotesk',sans-serif;
+    font-family:'Sora',sans-serif;
     font-size:2.05rem; font-weight:800;
     color:{C["text"]};
     margin:0 0 .5rem;
@@ -131,7 +131,8 @@ h1,h2,h3,h4{{
 }}
 .hero-title span{{color:{C["sky"]}}}
 .hero-desc{{
-    font-size:.9rem;
+    font-family:'Nunito',sans-serif;
+    font-size:.95rem;
     color:{C["muted"]};
     max-width:800px;
     line-height:1.65;
@@ -139,48 +140,40 @@ h1,h2,h3,h4{{
 }}
 
 /* ═══════════════════════════════
-   KPI CARDS
+   KPI CARDS (Reverted to app.py Rounded Style)
 ═══════════════════════════════ */
 .kpi-wrap{{
     background:{C["surface"]};
     border:1px solid {C["border"]};
-    border-radius:8px;
-    padding:1.4rem 1.5rem 1.25rem;
-    display:flex; flex-direction:column; gap:.15rem;
+    border-radius:14px;
+    padding:1.5rem 1.5rem;
+    display:flex; flex-direction:column; gap:.2rem;
     position:relative; overflow:hidden;
-    transition:border-color .18s, background .18s;
-    cursor:default;
+    transition:all .2s ease;
 }}
 .kpi-wrap:hover{{
-    border-color:#263248;
+    border-color:#3F4A63;
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px -8px rgba(0,0,0,0.4);
     background:{C["surface2"]};
 }}
 .kpi-bar{{
-    position:absolute;
-    top:0; left:0; right:0;
-    height:2px; border-radius:8px 8px 0 0;
+    position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;
 }}
 .kpi-label{{
-    font-size:.6rem; font-weight:600;
-    letter-spacing:2.2px; text-transform:uppercase;
-    color:{C["muted"]}; margin-bottom:.45rem;
-    font-family:'Inter',sans-serif;
+    font-family:'Nunito',sans-serif;
+    font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{C["muted"]}; margin-bottom:0.3rem;
 }}
 .kpi-val{{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:2rem; font-weight:700;
-    color:{C["text"]};
-    line-height:1.05; letter-spacing:-.5px;
-    margin-bottom:.2rem;
+    font-family:'Sora',sans-serif;font-size:2.1rem;font-weight:700;line-height:1.1; color:{C["text"]};
 }}
 .kpi-sub{{
-    font-size:.73rem; color:{C["muted"]};
-    font-weight:400; line-height:1.4;
-    font-family:'Inter',sans-serif;
+    font-family:'Nunito',sans-serif;
+    font-size:.8rem;color:{C["muted"]}; margin-top:0.3rem;
 }}
 
 /* ═══════════════════════════════
-   TABS
+   TABS (Minimalist app2 style but with Nunito)
 ═══════════════════════════════ */
 [data-testid="stTabs"] [role="tablist"]{{
     border-bottom:1px solid {C["border"]} !important;
@@ -191,9 +184,9 @@ h1,h2,h3,h4{{
     margin-bottom:1.5rem;
 }}
 [data-testid="stTabs"] [role="tab"]{{
-    font-family:'Inter',sans-serif !important;
-    font-size:.875rem !important;
-    font-weight:500 !important;
+    font-family:'Nunito',sans-serif !important;
+    font-size:.9rem !important;
+    font-weight:600 !important;
     color:{C["muted"]} !important;
     background:transparent !important;
     border:none !important;
@@ -210,7 +203,7 @@ h1,h2,h3,h4{{
 }}
 [data-testid="stTabs"] [role="tab"][aria-selected="true"]{{
     color:{C["text"]} !important;
-    font-weight:600 !important;
+    font-weight:700 !important;
     border-bottom:2px solid {C["sky"]} !important;
 }}
 
@@ -218,8 +211,8 @@ h1,h2,h3,h4{{
    SECTION TITLE
 ═══════════════════════════════ */
 .sec-title{{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:1.05rem; font-weight:700;
+    font-family:'Sora',sans-serif;
+    font-size:1.15rem; font-weight:700;
     color:{C["text"]};
     margin:1.5rem 0 1rem;
     padding-bottom:.6rem;
@@ -230,7 +223,7 @@ h1,h2,h3,h4{{
 .sec-title::before{{
     content:'';
     display:inline-block;
-    width:3px; height:1rem;
+    width:4px; height:1.1rem;
     background:{C["sky"]};
     border-radius:2px;
     flex-shrink:0;
@@ -243,33 +236,24 @@ h1,h2,h3,h4{{
     background:{C["surface"]};
     border:1px solid {C["border"]};
     border-left:3px solid {C["amber"]};
-    border-radius:0 6px 6px 0;
+    border-radius:0 10px 10px 0;
     padding:1.05rem 1.35rem;
     margin-top:.9rem;
 }}
 .insight-body{{
-    font-size:.875rem;
+    font-size:.9rem;
     color:#8BA8C7;
     line-height:1.72;
     font-weight:400;
-    font-family:'Inter',sans-serif;
+    font-family:'Nunito',sans-serif;
 }}
 .insight-body strong{{
     color:{C["text"]};
-    font-weight:600;
+    font-weight:700;
 }}
 .insight-body i{{
     font-style:italic;
     color:#7A9AB8;
-}}
-
-/* ═══════════════════════════════
-   RADIO OVERRIDE
-═══════════════════════════════ */
-[data-testid="stRadio"] label span p{{
-    font-size:.82rem !important;
-    color:{C["muted"]} !important;
-    font-family:'Inter',sans-serif !important;
 }}
 
 /* Hide st.info fallback */
@@ -402,7 +386,7 @@ def pro_layout(**kwargs):
     base = dict(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color=C["muted"], size=12),
+        font=dict(family='Nunito', color=C["muted"], size=12),
         margin=dict(l=10, r=10, t=60, b=50), 
         xaxis=dict(showgrid=False, zeroline=False, automargin=True, tickangle=0,
                    tickfont=dict(color=C["muted"], size=11), linecolor=C["border"]),
@@ -410,7 +394,7 @@ def pro_layout(**kwargs):
                    tickfont=dict(color=C["muted"], size=11)),
         legend=dict(orientation='h', yanchor='bottom', y=1.05, xanchor='center', x=0.5,
                     font=dict(color=C["muted"], size=11)),
-        hoverlabel=dict(bgcolor=C["surface2"], font=dict(family='Inter', color=C["text"]), bordercolor=C["border"])
+        hoverlabel=dict(bgcolor=C["surface2"], font=dict(family='Nunito', color=C["text"]), bordercolor=C["border"])
     )
     base.update(kwargs)
     return base
@@ -465,7 +449,6 @@ tab1, tab2, tab3 = st.tabs([
 
 # ── TAB 1: DEMOGRAFI & PENDIDIKAN ──
 with tab1:
-    # --- PERBAIKAN 3: KARTU PERBANDINGAN GENDER ---
     st.markdown('<div class="sec-title">Analisis Gender & Piramida Penduduk</div>', unsafe_allow_html=True)
     
     tot_laki = df_umur['Laki_Laki'].sum()
@@ -507,19 +490,23 @@ with tab1:
     laki = df_umur['Laki_Laki'].tolist()
     puan = df_umur['Perempuan'].tolist()
 
-    # --- PERBAIKAN 1: SUMBU X SIMETRIS & ANGKA GENAP ---
+    # --- SUMBU X SIMETRIS (0, 50k, 100k) ---
     max_v_raw = max(max(laki), max(puan))
-    # Buat kelipatan angka genap. Kalau datanya > 100k, intervalnya 40k. Kalau < 100k, interval 20k.
-    step = 40000 if max_v_raw > 100000 else 20000
-    max_val = int(np.ceil(max_v_raw / step) * step) # Membulatkan otomatis ke batas genap terdekat
-    
-    # Generate label (misal: -160k, -120k, ... 0 ... 120k, 160k)
-    ticks = list(range(-max_val, max_val + step, step))
-    tlabel = [f"{abs(v)//1000:.0f}k" if v != 0 else "0" for v in ticks]
+    max_val = max_v_raw * 1.05
+    ticks = [-100000, -50000, 0, 50000, 100000]
+    tlabel = ["100k", "50k", "0", "50k", "100k"]
 
     fig_pyr = go.Figure()
-    fig_pyr.add_trace(go.Bar(y=kel, x=[-v for v in laki], name='Laki-Laki', orientation='h', marker=dict(color=C["sky"], opacity=0.85), hovertemplate="<b>Usia %{y}</b><br>Laki-Laki: %{customdata:,} jiwa<extra></extra>", customdata=laki))
-    fig_pyr.add_trace(go.Bar(y=kel, x=puan, name='Perempuan', orientation='h', marker=dict(color=C["rose"], opacity=0.85), hovertemplate="<b>Usia %{y}</b><br>Perempuan: %{x:,} jiwa<extra></extra>"))
+    fig_pyr.add_trace(go.Bar(
+        y=kel, x=[-v for v in laki], name='Laki-Laki', orientation='h', 
+        marker=dict(color=C["sky"], opacity=0.85), 
+        hovertemplate="<b>Usia %{y}</b><br>Laki-Laki: %{customdata:,} jiwa<extra></extra>", customdata=laki
+    ))
+    fig_pyr.add_trace(go.Bar(
+        y=kel, x=puan, name='Perempuan', orientation='h', 
+        marker=dict(color=C["rose"], opacity=0.85), 
+        hovertemplate="<b>Usia %{y}</b><br>Perempuan: %{x:,} jiwa<extra></extra>"
+    ))
 
     # Shade usia produktif
     fig_pyr.add_shape(
@@ -540,8 +527,6 @@ with tab1:
     ))
     st.plotly_chart(fig_pyr, use_container_width=True, config=PCFG)
     
-    # Interpretasi spesifik Gender & Umur
-    # Ganti baris insight di Tab 1 (setelah st.plotly_chart(fig_pyr,...)) menjadi seperti ini:
     insight("<strong>Interpretasi Demografi & Gender</strong> : Rasio jenis kelamin secara agregat menunjukkan populasi yang seimbang (Sex Ratio ~101). Namun, piramida penduduk memperlihatkan transisi struktural antar kohort: <strong>Laki-laki mendominasi kelompok usia muda hingga produktif awal</strong>, sementara <strong>Perempuan mendominasi secara absolut di kelompok usia lanjut (65+).</strong> Pergeseran rasio jenis kelamin yang tajam di puncak piramida ini menunjukkan adanya fenomena <i>feminisasi lansia</i>, yang menuntut program perlindungan sosial dan kesehatan yang lebih spesifik gender di masa depan.")
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -569,7 +554,6 @@ with tab1:
     with col_edu:
         st.markdown('<div class="sec-title">Tingkat Pendidikan Tertinggi yang Ditamatkan (%)</div>', unsafe_allow_html=True)
         
-        # --- PERBAIKAN 2: FILTER GRAFIK PENDIDIKAN ---
         edu_filter = st.radio(
             "Tampilan Grafik:", 
             ["Laki-Laki & Perempuan", "Total Gabungan"], 
@@ -587,9 +571,7 @@ with tab1:
         fig_edu = go.Figure()
         
         if edu_filter == "Total Gabungan":
-            # Karena datanya format persentase, rata-rata adalah proxy terdekat untuk total populasi gabungan
             df_edu['Total_Avg'] = (df_edu['Laki_Laki'] + df_edu['Perempuan']) / 2
-            
             fig_edu.add_trace(go.Bar(
                 name='Total', x=df_edu['Ijazah_Short'], y=df_edu['Total_Avg'], 
                 marker=dict(color=C["violet"], opacity=0.85),
@@ -710,11 +692,11 @@ st.markdown(f"""
     border-top: 1px solid {C['border']}; 
     text-align: center; 
     color: {C['muted']}; 
-    font-family: 'Inter', sans-serif; 
+    font-family: 'Sora', sans-serif; 
     font-size: 0.7rem; 
     letter-spacing: 1.5px;
     text-transform: uppercase;
 ">
-    Created by <strong style="color: {C['text']}; font-weight: 600;">Sulthon Avidi</strong> &nbsp;•&nbsp; 2026
+    Created by <strong style="color: {C['text']}; font-weight: 700;">Sulthon Avidi</strong> &nbsp;•&nbsp; 2026
 </div>
 """, unsafe_allow_html=True)
